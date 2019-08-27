@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/client/src/main/scala/client/Main.scala:79:19: not found: type Dispatcher[0m
+[0m[[0m[31merror[0m] [0m[0m    Props(classOf[Dispatcher])[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

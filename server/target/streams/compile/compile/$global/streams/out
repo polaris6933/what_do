@@ -1,0 +1,34 @@
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/Store.scala:93:29: value message is not a member of user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0m        return ByteString(e.message)[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/Store.scala:110:29: value message is not a member of user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0m        return ByteString(e.message)[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/Store.scala:125:29: value message is not a member of user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0m        return ByteString(e.message)[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala:10:5: ambiguous reference to overloaded definition,[0m
+[0m[[0m[31merror[0m] [0m[0mboth constructor EntryException in class EntryException of type (message: String)user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0mand  constructor EntryException in class EntryException of type (message: String)user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0mmatch argument types (String)[0m
+[0m[[0m[31merror[0m] [0m[0m    this(message)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala:14:5: overloaded method constructor EntryException with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  ()user.EntryException <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (cause: Throwable)user.EntryException <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (message: String)user.EntryException <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (message: String)user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (String, Throwable)[0m
+[0m[[0m[31merror[0m] [0m[0m    this(Option(cause).map(_.toString).orNull, cause)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala:18:5: ambiguous reference to overloaded definition,[0m
+[0m[[0m[31merror[0m] [0m[0mboth constructor EntryException in class EntryException of type (message: String)user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0mand  constructor EntryException in class EntryException of type (message: String)user.EntryException[0m
+[0m[[0m[31merror[0m] [0m[0mmatch argument types (String)[0m
+[0m[[0m[31merror[0m] [0m[0m    this(null: String)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala:9:7: constructor EntryException is defined twice;[0m
+[0m[[0m[31merror[0m] [0m[0m  the conflicting constructor EntryException was defined at line 8:21[0m
+[0m[[0m[31merror[0m] [0m[0m  def this(message: String) = {[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m7 errors found[0m

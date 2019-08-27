@@ -1,0 +1,27 @@
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(/home/zdravko/Documents/code/scala/server/src/main/scala/server/Doable.scala, /home/zdravko/Documents/code/scala/server/src/main/scala/server/Store.scala, /home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(doable.Doable, store.Store.ClientMessage, store.Store, user.User, store.Store.Response, doable.Picker)[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(doable.Doable, store.Store.ClientMessage, store.Store, user.User, store.Store.Response, doable.Picker)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(/home/zdravko/Documents/code/scala/server/src/main/scala/server/Doable.scala, /home/zdravko/Documents/code/scala/server/src/main/scala/server/Store.scala, /home/zdravko/Documents/code/scala/server/src/main/scala/server/User.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mRecompiling all 4 sources: invalidated sources (3) exceeded 50.0% of all sources[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 4 Scala sources to /home/zdravko/Documents/code/scala/server/target/scala-2.12/classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.7[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.12:1.2.5:compile for Scala 2.12.7[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 2ea7d89e for Scala compiler version 2.12.7[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-bootclasspath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/zdravko/.sbt/boot/scala-2.12.7/lib/scala-library.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
+[0m[[0m[0mdebug[0m] [0m[0m	/home/zdravko/Documents/code/scala/server/target/scala-2.12/classes:/home/zdravko/.ivy2/cache/com.typesafe.akka/akka-actor_2.12/jars/akka-actor_2.12-2.5.25.jar:/home/zdravko/.ivy2/cache/com.typesafe/config/bundles/config-1.3.3.jar:/home/zdravko/.ivy2/cache/org.scala-lang.modules/scala-java8-compat_2.12/bundles/scala-java8-compat_2.12-0.8.0.jar:/home/zdravko/.ivy2/cache/com.typesafe.slick/slick_2.12/bundles/slick_2.12-3.3.1.jar:/home/zdravko/.ivy2/cache/org.slf4j/slf4j-api/jars/slf4j-api-1.7.25.jar:/home/zdravko/.ivy2/cache/org.reactivestreams/reactive-streams/jars/reactive-streams-1.0.2.jar:/home/zdravko/.ivy2/cache/org.scala-lang.modules/scala-collection-compat_2.12/bundles/scala-collection-compat_2.12-2.0.0.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mCompilation failed (CompilerInterface)[0m
