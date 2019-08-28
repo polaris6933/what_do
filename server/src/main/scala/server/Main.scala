@@ -14,6 +14,8 @@ import akka.pattern.ask
 import akka.util.{ ByteString, Timeout }
 
 import store.Store
+import doable.{ Doable, Picker }
+import user.User
 
 
 class Server extends Actor {
@@ -63,6 +65,9 @@ class ConnectionHandler extends Actor {
 object MainLoop extends App {
   val system = ActorSystem("application")
   val server = system.actorOf(Props[Server], "server")
+
+  val u = new User
+  u.changeStrat("time")
 
   val loop = new Breaks
   loop.breakable {

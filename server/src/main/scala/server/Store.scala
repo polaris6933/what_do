@@ -4,7 +4,8 @@ import akka.actor.Actor
 import akka.util.ByteString
 
 import doable.{ Doable, Picker }
-import user.{ User, EntryException }
+// import user.{ User, EntryException }
+import user.User
 
 
 object Store {
@@ -55,6 +56,18 @@ class Store extends Actor {
             return error("invalid argument for time")
         }
 
+      case "strat" =>
+        if (!validLength(2)) {
+          return error("invalid number of arguments")
+        }
+        () => strat(message(1))
+
+      case "custom_strat" =>
+        if (!validLength(4)) {
+          return error("invalid number of arguments")
+        }
+        () => customStrat(message(1), message(2), message(3))
+
       case "pick" =>
         if (!validLength(2)) {
           return error("invalid number of arguments")
@@ -89,8 +102,9 @@ class Store extends Actor {
     try {
       userData("joe") = user.register(name, priority, time)
     } catch {
-      case e: EntryException =>
-        return ByteString(e.message)
+      // case e: EntryException =>
+      //   return ByteString(e.message)
+      case _ => "oops"
     }
     ByteString("ok")
   }
@@ -106,9 +120,23 @@ class Store extends Actor {
     try {
       userData("joe") = user.pick(name)
     } catch {
-      case e: EntryException =>
-        return ByteString(e.message)
+      // case e: EntryException =>
+      //   return ByteString(e.message)
+      case _ => "oops"
     }
+    ByteString("ok")
+  }
+
+  private def strat(strat: String): ByteString = {
+    val user = userData("joe")
+    userData("joe") = user.changeStrat(strat)
+    ByteString("ok")
+  }
+
+  private def customStrat(first: String, second: String, third: String): ByteString = {
+    val user = userData("joe")
+    // TODO: error handling
+    userData("joe") = user.customStrat(first, second, third)
     ByteString("ok")
   }
 
@@ -121,8 +149,9 @@ class Store extends Actor {
     try {
       userData("joe") = user.prioritize(name, priority)
     } catch {
-      case e: EntryException =>
-        return ByteString(e.message)
+      // case e: EntryException =>
+      //   return ByteString(e.message)
+      case _ => "oops"
     }
     ByteString("ok")
   }

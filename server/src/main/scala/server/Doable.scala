@@ -1,6 +1,7 @@
 package doable
 
 import scala.collection.mutable.ListBuffer
+import scala.reflect.runtime.universe._
 
 
 class Doable(val name: String, val priority: Int, val time: Int, val dust: Int) {
@@ -28,27 +29,60 @@ object Doable {
 }
 
 object Picker {
-  def prioritySort(d1: Doable, d2: Doable): Boolean = {
-    if (d1.priority == d2.priority) {
-      d1.time > d2.time
+  def prioritySort(lhs: Doable, rhs: Doable): Boolean = {
+    if (lhs.priority == rhs.priority) {
+      lhs.time > rhs.time
     } else {
-      d1.priority < d2.priority
+      lhs.priority < rhs.priority
     }
   }
 
-  def timeSort(d1: Doable, d2: Doable): Boolean = {
-    if (d1.time == d2.time) {
-      d1.priority > d2.priority
+  def timeSort(lhs: Doable, rhs: Doable): Boolean = {
+    if (lhs.time == rhs.time) {
+      lhs.priority > rhs.priority
     } else {
-      d1.time < d2.time
+      lhs.time < rhs.time
     }
   }
 
-  def dustSort(d1: Doable, d2: Doable): Boolean = {
-    if (d1.dust == d2.dust) {
-      d1.time > d2.time
+  def dustSort(lhs: Doable, rhs: Doable): Boolean = {
+    if (lhs.dust == rhs.dust) {
+      lhs.time > rhs.time
     } else {
-      d1.dust < d2.dust
+      lhs.dust < rhs.dust
+    }
+  }
+
+  def getCustomSort(first: String, second: String, third: String) =
+  (lhs: Doable, rhs: Doable) => {
+    val mirror = runtimeMirror(getClass.getClassLoader)
+    val lhsMirror = mirror.reflect(lhs)
+    val rhsMirror = mirror.reflect(rhs)
+
+    val firstField = typeOf[Doable].declaration(first: TermName).asMethod
+    val secondField = typeOf[Doable].declaration(second: TermName).asMethod
+    val thirdField = typeOf[Doable].declaration(third: TermName).asMethod
+
+    val getField =
+      (mirror: InstanceMirror, field: MethodSymbol) =>
+        mirror.reflectField(field).get.asInstanceOf[Int]
+
+    val rhsFirstField = getField(rhsMirror, firstField)
+    val rhsSecondField = getField(rhsMirror, secondField)
+    val rhsThirdField = getField(rhsMirror, thirdField)
+
+    val lhsFirstField = getField(lhsMirror, firstField)
+    val lhsSecondField = getField(lhsMirror, secondField)
+    val lhsThirdField = getField(lhsMirror, thirdField)
+
+    if (lhsFirstField == rhsFirstField) {
+      if (lhsSecondField == rhsSecondField) {
+        lhsThirdField < rhsThirdField
+      } else {
+        lhsSecondField < rhsSecondField
+      }
+    } else {
+      lhsFirstField < rhsFirstField
     }
   }
 
