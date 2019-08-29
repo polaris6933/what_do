@@ -18,13 +18,19 @@ class Doable(val name: String, val priority: Int, val time: Int, val dust: Int) 
   }
 
   override def toString: String = {
-    return name + " - " + time + " - " + priority + " - " + dust
+    return name + " - " + priority + " - " + time + " - " + dust
   }
 }
 
 object Doable {
   def concatOptions(list: List[Doable]): String = {
-    "you can spend " + list.map(_.printable).mkString(" and \n")
+    val prefix = "you can spend "
+    val result = prefix + list.map(_.printable).mkString(" and\n")
+    if (result == prefix) {
+      result + "no time"
+    } else {
+      result
+    }
   }
 }
 
@@ -39,7 +45,7 @@ object Picker {
 
   def timeSort(lhs: Doable, rhs: Doable): Boolean = {
     if (lhs.time == rhs.time) {
-      lhs.priority > rhs.priority
+      lhs.priority < rhs.priority
     } else {
       lhs.time < rhs.time
     }
@@ -49,12 +55,12 @@ object Picker {
     if (lhs.dust == rhs.dust) {
       lhs.time > rhs.time
     } else {
-      lhs.dust < rhs.dust
+      lhs.dust > rhs.dust
     }
   }
 
   def getCustomSort(first: String, second: String, third: String) =
-  (lhs: Doable, rhs: Doable) => {
+    (lhs: Doable, rhs: Doable) => {
     val mirror = runtimeMirror(getClass.getClassLoader)
     val lhsMirror = mirror.reflect(lhs)
     val rhsMirror = mirror.reflect(rhs)
@@ -86,7 +92,8 @@ object Picker {
     }
   }
 
-  private def pick(doables: List[Doable], timeAvailable: Int,
+  // TODO: consolidate these 2 functions
+  def pick(doables: List[Doable], timeAvailable: Int,
     sorter: (Doable, Doable) => Boolean): List[Doable] = {
     val sorted = doables.sortWith(sorter)
     var timeTaken = 0
@@ -101,7 +108,7 @@ object Picker {
   }
 
   def choose(doables: List[Doable], timeAvailable: Int, sort: (Doable, Doable) => Boolean):
-  List[Doable] = {
+    List[Doable] = {
     val valid = doables.filter(_.time <= timeAvailable)
     pick(valid, timeAvailable, sort)
   }
