@@ -4,7 +4,6 @@ import akka.actor.Actor
 import akka.util.ByteString
 
 import doable.{ Doable, Picker }
-// import user.{ User, EntryException }
 import user.User
 
 
@@ -99,13 +98,11 @@ class Store extends Actor {
 
   private def register(name: String, priority: Int, time: Int): ByteString = {
     val user = userData("joe")
-    try {
-      userData("joe") = user.register(name, priority, time)
-    } catch {
-      // case e: EntryException =>
-      //   return ByteString(e.message)
-      case _ => "oops"
+    val registered = user.register(name, priority, time)
+    if (registered.isEmpty) {
+      return ByteString(name + " is already registered")
     }
+    userData("joe") = registered.get
     ByteString("ok")
   }
 
@@ -117,13 +114,11 @@ class Store extends Actor {
 
   private def pick(name: String): ByteString = {
     val user = userData("joe")
-    try {
-      userData("joe") = user.pick(name)
-    } catch {
-      // case e: EntryException =>
-      //   return ByteString(e.message)
-      case _ => "oops"
+    val picked = user.pick(name)
+    if (picked.isEmpty) {
+      return ByteString(name + " is not registered")
     }
+    userData("joe") = picked.get
     ByteString("ok")
   }
 
@@ -135,7 +130,12 @@ class Store extends Actor {
 
   private def customStrat(first: String, second: String, third: String): ByteString = {
     val user = userData("joe")
-    // TODO: error handling
+    val validFields = List("priority", "time", "dust")
+    val inputIsValid = for (field <- List(first, second, third))
+      yield validFields.contains(field)
+    if (inputIsValid.contains(false)) {
+      return ByteString("invalid strategy ordering")
+    }
     userData("joe") = user.customStrat(first, second, third)
     ByteString("ok")
   }
@@ -146,13 +146,11 @@ class Store extends Actor {
 
   private def prioritize(name: String, priority: Int): ByteString = {
     val user = userData("joe")
-    try {
-      userData("joe") = user.prioritize(name, priority)
-    } catch {
-      // case e: EntryException =>
-      //   return ByteString(e.message)
-      case _ => "oops"
+    val prioritized = user.prioritize(name, priority)
+    if (prioritized.isEmpty) {
+      return ByteString(name + " is not registered")
     }
+    userData("joe") = prioritized.get
     ByteString("ok")
   }
 }

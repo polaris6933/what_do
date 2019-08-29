@@ -5,34 +5,17 @@ import scala.reflect.runtime.universe._
 
 import doable.{ Doable, Picker }
 
-// TODO: look into Try
-// class EntryException(message: String) extends Exception(message) {
-//   def this(message: String) = {
-//     this(message)
-//   }
-
-//   def this(cause: Throwable) {
-//     this(Option(cause).map(_.toString).orNull, cause)
-//   }
-
-//   def this() = {
-//     this(null: String)
-//   }
-// }
-
 class User(val doables: List[Doable], val pickStrat: (Doable, Doable) => Boolean) {
-  // val validStrats = List("priority", "time", "dust")
-
   def this() = {
     this(List[Doable](), Picker.prioritySort)
   }
 
-  def register(name: String, priority: Int, time: Int): User = {
+  def register(name: String, priority: Int, time: Int): Option[User]= {
     if (doables.exists(x => x.name == name)) {
-      // throw new EntryException(name + " is already registered")
+      return None
     }
     val newData = doables :+ new Doable(name, priority, time)
-    new User(newData, pickStrat)
+    Some(new User(newData, pickStrat))
   }
 
   def changeStrat(strat: String): User = {
@@ -45,7 +28,6 @@ class User(val doables: List[Doable], val pickStrat: (Doable, Doable) => Boolean
       case "priority" => Picker.prioritySort
       case "time" => Picker.timeSort
       case "dust" => Picker.dustSort
-      // TODO: error handling
     }
     new User(doables, sort)
   }
@@ -59,26 +41,26 @@ class User(val doables: List[Doable], val pickStrat: (Doable, Doable) => Boolean
     Picker.choose(doables, time, pickStrat)
   }
 
-  def pick(name: String): User = {
+  def pick(name: String): Option[User] = {
     if (!doables.exists(x => x.name == name)) {
-      // throw new EntryException(name + " is not registered")
+      return None
     }
     val newData = for (entry <- doables if entry.name != name)
       yield entry.addDust
-    new User(newData, pickStrat)
+    Some(new User(newData, pickStrat))
   }
 
   def catalog(): ByteString = {
     ByteString(doables.map(_.toString).mkString("\n"))
   }
 
-  def prioritize(name: String, priority: Int): User = {
+  def prioritize(name: String, priority: Int): Option[User] = {
     val entry = doables.find(_.name == name)
     if (entry.isEmpty) {
-      // throw new EntryException(name + " is not registered")
+      return None
     }
     val newData = doables.filter(_.name != name) :+
                   new Doable(name, priority, entry.get.time)
-    new User(newData, pickStrat)
+    Some(new User(newData, pickStrat))
   }
 }
