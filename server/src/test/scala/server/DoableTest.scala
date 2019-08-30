@@ -44,17 +44,17 @@ class PickerTest extends FlatSpec with Matchers {
   val d5 = new Doable("parasite", 1, 10)
   val d6 = new Doable("lotr", 0, 10)
 
-  "choose" should "order properly by priority" in {
+  "pick" should "order properly by priority" in {
     val res = pick(List(d1, d2, d3, d4, d5, d6), 50, prioritySort)
     concatOptions(res) shouldBe concatOptions(List(d6, d3))
   }
 
-  "choose" should "order properly by time" in {
+  "pick" should "order properly by time" in {
     val res = pick(List(d1, d2, d3, d4, d5, d6), 50, timeSort)
     concatOptions(res) shouldBe concatOptions(List(d6, d5, d4))
   }
 
-  "choose" should "order properly by dust" in {
+  "pick" should "order properly by dust" in {
     val d7 = d3.addDust.addDust
     val d8 = d4.addDust
     val d9 = d5.addDust

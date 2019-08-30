@@ -38,7 +38,7 @@ class User(val doables: List[Doable], val pickStrat: (Doable, Doable) => Boolean
   }
 
   def show(time: Int): List[Doable] = {
-    Picker.choose(doables, time, pickStrat)
+    Picker.pick(doables, time, pickStrat)
   }
 
   def pick(name: String): Option[User] = {

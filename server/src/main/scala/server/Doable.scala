@@ -92,7 +92,7 @@ object Picker {
     }
   }
 
-  def choose(doables: List[Doable], timeAvailable: Int, sort: (Doable, Doable) => Boolean):
+  def pick(doables: List[Doable], timeAvailable: Int, sort: (Doable, Doable) => Boolean):
     List[Doable] = {
     val valid = doables.filter(_.time <= timeAvailable)
     val sorted = valid.sortWith(sort)
