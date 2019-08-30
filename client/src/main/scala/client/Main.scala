@@ -74,7 +74,7 @@ object MainLoop extends App {
   Thread.sleep(500)
   client ! SendMessage(ByteString("register - mushishi - 2 - 20"))
   Thread.sleep(500)
-  client ! SendMessage(ByteString("register - puzzle - 1 - 10"))
+  client ! SendMessage(ByteString("register - parasite - 1 - 10"))
   Thread.sleep(500)
   client ! SendMessage(ByteString("register - lotr - 0 - 10"))
   Thread.sleep(500)

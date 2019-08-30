@@ -92,10 +92,10 @@ object Picker {
     }
   }
 
-  // TODO: consolidate these 2 functions
-  def pick(doables: List[Doable], timeAvailable: Int,
-    sorter: (Doable, Doable) => Boolean): List[Doable] = {
-    val sorted = doables.sortWith(sorter)
+  def choose(doables: List[Doable], timeAvailable: Int, sort: (Doable, Doable) => Boolean):
+    List[Doable] = {
+    val valid = doables.filter(_.time <= timeAvailable)
+    val sorted = valid.sortWith(sort)
     var timeTaken = 0
     var result = new ListBuffer[Doable]()
     for (d <- sorted) {
@@ -105,11 +105,5 @@ object Picker {
       }
     }
     result.toList
-  }
-
-  def choose(doables: List[Doable], timeAvailable: Int, sort: (Doable, Doable) => Boolean):
-    List[Doable] = {
-    val valid = doables.filter(_.time <= timeAvailable)
-    pick(valid, timeAvailable, sort)
   }
 }

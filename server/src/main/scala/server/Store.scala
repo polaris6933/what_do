@@ -79,6 +79,12 @@ class Store extends Actor {
         }
         () => catalog
 
+      case "clear" =>
+        if (!validLength(1)) {
+          return error("invalid number of arguments")
+        }
+        () => clear
+
       case "prioritize" =>
         if (!validLength(3)) {
           return error("invalid number of arguments")
@@ -142,6 +148,11 @@ class Store extends Actor {
 
   private def catalog: ByteString = {
     userData("joe").catalog
+  }
+
+  private def clear: ByteString = {
+    userData("joe") = new User
+    ByteString("ok")
   }
 
   private def prioritize(name: String, priority: Int): ByteString = {
